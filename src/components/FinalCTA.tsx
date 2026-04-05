@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import warrenLogo from "@/assets/warren-logo-full.png";
+import appStoreBadge from "@/assets/app-store-badge.png";
 
 const FinalCTA = () => {
   const ref = useRef(null);
@@ -18,7 +19,7 @@ const FinalCTA = () => {
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <img src={warrenLogo} alt="Warren" className="w-[200px] h-auto" />
+          <img src={warrenLogo} alt="Warren" className="w-[300px] md:w-[360px] h-auto" />
         </motion.div>
 
         <motion.h2
@@ -39,27 +40,18 @@ const FinalCTA = () => {
           Start building your perfect portfolio today. No experience required.
         </motion.p>
 
-        <motion.div
+        <motion.a
+          href="https://apps.apple.com/gb/app/warren-simplify-investing/id6504190197"
+          target="_blank"
+          rel="noopener noreferrer"
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.7 }}
-          className="flex flex-col sm:flex-row gap-4"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.97 }}
         >
-          <motion.button
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,255,255,0.15)" }}
-            whileTap={{ scale: 0.97 }}
-            className="px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-heading font-semibold text-lg"
-          >
-            Download for iOS
-          </motion.button>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.97 }}
-            className="px-8 py-3.5 rounded-full border border-border text-primary font-heading font-semibold text-lg hover:bg-secondary transition-colors"
-          >
-            Download for Android
-          </motion.button>
-        </motion.div>
+          <img src={appStoreBadge} alt="Download on the App Store" className="h-[52px] w-auto" />
+        </motion.a>
       </div>
     </section>
   );
