@@ -38,16 +38,19 @@ const HeroSection = () => {
         Warren — your personal investing assistant that makes the market simple.
       </motion.p>
 
-      <motion.button
+      <motion.a
+        href="https://apps.apple.com/gb/app/warren-simplify-investing/id6504190197"
+        target="_blank"
+        rel="noopener noreferrer"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 1.1 }}
-        whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,255,255,0.15)" }}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
-        className="mt-8 px-8 py-3.5 rounded-full bg-primary text-primary-foreground font-heading font-semibold text-lg transition-all"
+        className="mt-8"
       >
-        Get Started
-      </motion.button>
+        <img src={appStoreBadge} alt="Download on the App Store" className="h-[52px] w-auto" />
+      </motion.a>
 
       <motion.div
         initial={{ opacity: 0 }}
