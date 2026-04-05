@@ -103,3 +103,40 @@
     font-family: var(--font-body);
   }
 }
+
+/* Logo shine effect */
+.logo-shine-container {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.logo-shine {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    105deg,
+    transparent 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(255, 255, 255, 0) 60%,
+    transparent 80%
+  );
+  animation: logo-shine-sweep 4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes logo-shine-sweep {
+  0% {
+    left: -100%;
+  }
+  40% {
+    left: 200%;
+  }
+  100% {
+    left: 200%;
+  }
+}

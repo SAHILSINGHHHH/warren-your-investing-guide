@@ -14,9 +14,10 @@ const HeroSection = () => {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
-        className="relative z-10"
+        className="relative z-10 logo-shine-container"
       >
         <img src={warrenLogo} alt="Warren" className="w-[280px] h-auto" />
+        <div className="logo-shine" />
       </motion.div>
 
       <motion.h1
