@@ -30,8 +30,8 @@ const AnimatedSphere = ({ size = 300, className = "" }: AnimatedSphereProps) => 
       const r = size * 0.38;
       const dots: { x: number; y: number; z: number }[] = [];
 
-      const rows = 18;
-      const cols = 24;
+      const rows = 28;
+      const cols = 36;
 
       for (let i = 0; i <= rows; i++) {
         const phi = (Math.PI * i) / rows;
@@ -51,8 +51,8 @@ const AnimatedSphere = ({ size = 300, className = "" }: AnimatedSphereProps) => 
         const scale = (z + 1.5) / 2.5;
         const px = cx + x * r;
         const py = cy - y * r;
-        const dotSize = 1.2 + scale * 2.2;
-        const alpha = 0.15 + scale * 0.7;
+        const dotSize = 1.5 + scale * 3.5;
+        const alpha = 0.08 + scale * 0.92;
 
         ctx.beginPath();
         ctx.arc(px, py, dotSize, 0, Math.PI * 2);
