@@ -5,7 +5,7 @@ import appStoreBadge from "@/assets/app-store-badge.png";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden gradient-hero">
+    <section className="relative h-screen flex flex-col items-center justify-center overflow-hidden gradient-hero px-6">
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-muted/20 blur-[120px]" />
