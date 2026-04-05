@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import WarrenLogo from "@/components/WarrenLogo";
+import warrenLogo from "@/assets/warren-logo-full.png";
 
 const FinalCTA = () => {
   const ref = useRef(null);
@@ -18,7 +18,7 @@ const FinalCTA = () => {
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <WarrenLogo size={200} />
+          <img src={warrenLogo} alt="Warren" className="w-[200px] h-auto" />
         </motion.div>
 
         <motion.h2

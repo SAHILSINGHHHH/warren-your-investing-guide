@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import WarrenLogo from "@/components/WarrenLogo";
+import warrenLogo from "@/assets/warren-logo-full.png";
 
 const HeroSection = () => {
   return (
@@ -16,7 +16,7 @@ const HeroSection = () => {
         transition={{ duration: 1.2, ease: "easeOut" }}
         className="relative z-10"
       >
-        <WarrenLogo size={280} />
+        <img src={warrenLogo} alt="Warren" className="w-[280px] h-auto" />
       </motion.div>
 
       <motion.h1
