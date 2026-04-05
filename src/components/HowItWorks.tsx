@@ -19,16 +19,12 @@ const StockAnimation = () => (
         <span className="text-white/70 font-medium">{stock.name}</span>
         <span className={`flex items-center gap-0.5 ${stock.up ? "text-emerald-400" : "text-red-400"}`}>
           {stock.up ? <ArrowUp className="w-2 h-2" /> : <ArrowDown className="w-2 h-2" />}
-          <motion.span
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
+          <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 2, repeat: Infinity }}>
             {stock.up ? "+2.4%" : "-1.1%"}
           </motion.span>
         </span>
       </motion.div>
     ))}
-    {/* Floating trend line */}
     <svg className="absolute bottom-1 left-2 right-2 h-6 opacity-20" viewBox="0 0 100 20">
       <motion.path
         d="M0,15 Q15,12 25,10 T50,5 T75,8 T100,3"
@@ -45,23 +41,17 @@ const StockAnimation = () => (
 
 const PortfolioAnimation = () => (
   <div className="relative w-full h-20 mt-4 overflow-hidden rounded-lg bg-white/5 flex items-center justify-center gap-3 px-3">
-    {/* Flowing money particles */}
     {[0, 1, 2, 3, 4].map((i) => (
       <motion.div
         key={i}
         className="absolute"
         initial={{ x: -20, y: 40, opacity: 0 }}
-        animate={{
-          x: [- 20, 60 + i * 30, 120 + i * 20],
-          y: [40, 10 + i * 5, 40],
-          opacity: [0, 1, 0],
-        }}
+        animate={{ x: [-20, 60 + i * 30, 120 + i * 20], y: [40, 10 + i * 5, 40], opacity: [0, 1, 0] }}
         transition={{ duration: 2.5, delay: i * 0.5, repeat: Infinity, repeatDelay: 0.5 }}
       >
         <DollarSign className="w-3 h-3 text-emerald-400/60" />
       </motion.div>
     ))}
-    {/* Pie segments */}
     <svg className="w-12 h-12" viewBox="0 0 32 32">
       {[
         { d: "M16,16 L16,2 A14,14 0 0,1 28.1,22Z", color: "hsl(var(--primary))", delay: 0 },
@@ -112,16 +102,13 @@ const ChatAnimation = () => {
         >
           <div
             className={`text-[9px] px-2 py-1 rounded-lg max-w-[75%] ${
-              msg.isUser
-                ? "bg-primary text-primary-foreground rounded-br-sm"
-                : "bg-white/10 text-white/70 rounded-bl-sm"
+              msg.isUser ? "bg-primary text-primary-foreground rounded-br-sm" : "bg-white/10 text-white/70 rounded-bl-sm"
             }`}
           >
             {msg.text}
           </div>
         </motion.div>
       ))}
-      {/* Typing dots */}
       <motion.div
         className="flex gap-0.5 ml-1"
         animate={{ opacity: [0, 1, 1, 0] }}
@@ -171,11 +158,16 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[0]; index: n
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.2 }}
-      className="flex flex-col items-center text-center p-8 rounded-2xl bg-card border border-border glow-sm"
+      whileHover={{ y: -8, boxShadow: "0 0 40px hsl(var(--glow) / 0.12)" }}
+      className="flex flex-col items-center text-center p-8 rounded-2xl bg-card border border-border glow-sm transition-colors duration-300 hover:border-primary/30"
     >
-      <div className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center mb-5">
+      <motion.div
+        className="w-14 h-14 rounded-xl bg-secondary flex items-center justify-center mb-5"
+        whileHover={{ rotate: 5, scale: 1.1 }}
+        transition={{ type: "spring", stiffness: 300 }}
+      >
         <feature.icon className="w-7 h-7 text-primary" />
-      </div>
+      </motion.div>
       <h3 className="font-heading text-xl font-semibold text-primary mb-3">{feature.title}</h3>
       <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
       <Animation />
@@ -202,10 +194,28 @@ const HowItWorks = () => {
             Three steps to smarter investing. No experience needed.
           </p>
         </motion.div>
-        <div className="grid md:grid-cols-3 gap-6">
-          {features.map((f, i) => (
-            <FeatureCard key={f.title} feature={f} index={i} />
-          ))}
+
+        <div className="relative">
+          {/* Connecting dashed line SVG */}
+          <svg className="absolute top-1/2 left-0 w-full h-2 -translate-y-1/2 hidden md:block" preserveAspectRatio="none">
+            <motion.line
+              x1="16.5%"
+              y1="50%"
+              x2="83.5%"
+              y2="50%"
+              stroke="hsl(var(--border))"
+              strokeWidth="2"
+              strokeDasharray="8 6"
+              initial={{ pathLength: 0, opacity: 0 }}
+              animate={inView ? { pathLength: 1, opacity: 0.5 } : {}}
+              transition={{ duration: 1.5, delay: 0.8 }}
+            />
+          </svg>
+          <div className="grid md:grid-cols-3 gap-6 relative z-10">
+            {features.map((f, i) => (
+              <FeatureCard key={f.title} feature={f} index={i} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

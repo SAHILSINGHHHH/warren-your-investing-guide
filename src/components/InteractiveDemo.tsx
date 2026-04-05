@@ -9,6 +9,59 @@ const questions = [
   { q: "What are dividend stocks?", a: "Dividend stocks pay you regular income from company profits. They're ideal for passive income — think Coca-Cola, Johnson & Johnson, or Procter & Gamble." },
 ];
 
+const TypingDots = () => (
+  <div className="flex justify-start">
+    <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-md bg-secondary">
+      <div className="flex gap-1">
+        {[0, 1, 2].map((d) => (
+          <motion.span
+            key={d}
+            className="w-2 h-2 bg-muted-foreground/50 rounded-full"
+            animate={{ y: [0, -6, 0] }}
+            transition={{ duration: 0.6, delay: d * 0.15, repeat: Infinity }}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+);
+
+const TypewriterText = ({ text }: { text: string }) => {
+  const [displayed, setDisplayed] = useState("");
+  const [showDots, setShowDots] = useState(true);
+
+  useEffect(() => {
+    setDisplayed("");
+    setShowDots(true);
+    const dotsTimer = setTimeout(() => {
+      setShowDots(false);
+      let i = 0;
+      const interval = setInterval(() => {
+        i++;
+        setDisplayed(text.slice(0, i));
+        if (i >= text.length) clearInterval(interval);
+      }, 18);
+      return () => clearInterval(interval);
+    }, 600);
+    return () => clearTimeout(dotsTimer);
+  }, [text]);
+
+  if (showDots) return <TypingDots />;
+
+  return (
+    <div className="flex justify-start">
+      <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-md text-sm leading-relaxed bg-secondary text-secondary-foreground">
+        {displayed}
+        <motion.span
+          animate={{ opacity: [1, 0] }}
+          transition={{ duration: 0.5, repeat: Infinity }}
+          className="inline-block w-0.5 h-4 bg-secondary-foreground/50 ml-0.5 align-middle"
+        />
+      </div>
+    </div>
+  );
+};
+
 const InteractiveDemo = () => {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: "-100px" });
@@ -18,7 +71,7 @@ const InteractiveDemo = () => {
     if (!inView) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % questions.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, [inView]);
 
@@ -58,11 +111,7 @@ const InteractiveDemo = () => {
                     {current.q}
                   </div>
                 </div>
-                <div className="flex justify-start">
-                  <div className="max-w-[80%] px-4 py-3 rounded-2xl rounded-bl-md text-sm leading-relaxed bg-secondary text-secondary-foreground">
-                    {current.a}
-                  </div>
-                </div>
+                <TypewriterText text={current.a} />
               </motion.div>
             </AnimatePresence>
           </div>

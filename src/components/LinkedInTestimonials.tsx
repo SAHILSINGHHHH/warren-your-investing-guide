@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ThumbsUp, MessageCircle, Share2 } from "lucide-react";
 
+const floatingEmojis = ["👍", "💡", "🔥", "📈", "⭐"];
+
 const testimonials = [
   {
     name: "Priya Sharma",
@@ -70,6 +72,31 @@ const LinkedInTestimonials = () => {
 
   return (
     <section className="py-24 px-6 relative overflow-hidden">
+      {/* Floating reaction emojis */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        {floatingEmojis.map((emoji, i) => (
+          <motion.span
+            key={i}
+            className="absolute text-lg opacity-0"
+            style={{ left: `${15 + i * 18}%`, bottom: "10%" }}
+            animate={{
+              y: [0, -300, -500],
+              opacity: [0, 0.6, 0],
+              x: [0, (i % 2 === 0 ? 1 : -1) * 30],
+            }}
+            transition={{
+              duration: 5 + i,
+              delay: i * 1.5,
+              repeat: Infinity,
+              repeatDelay: 3,
+              ease: "easeOut",
+            }}
+          >
+            {emoji}
+          </motion.span>
+        ))}
+      </div>
+
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -92,26 +119,27 @@ const LinkedInTestimonials = () => {
           </p>
         </motion.div>
 
-        <div className="relative h-[340px] flex items-center justify-center">
+        <div className="relative h-[340px] flex items-center justify-center" style={{ perspective: "1000px" }}>
           <AnimatePresence mode="popLayout">
             {getVisibleCards().map((testimonial, index) => (
               <motion.div
                 key={`${testimonial.name}-${currentIndex}-${index}`}
-                initial={{ scale: 0.8, opacity: 0, x: 100 }}
+                initial={{ scale: 0.8, opacity: 0, x: 100, rotateY: 5 }}
                 animate={{
                   scale: 1 - index * 0.05,
                   opacity: 1 - index * 0.25,
                   x: index * 20,
                   y: index * 8,
                   zIndex: 3 - index,
+                  rotateY: index * -2,
                 }}
-                exit={{ scale: 0.8, opacity: 0, x: -200 }}
+                exit={{ scale: 0.8, opacity: 0, x: -200, rotateY: -10 }}
                 transition={{ duration: 0.6, ease: "easeInOut" }}
                 className="absolute w-full max-w-xl"
                 style={{ zIndex: 3 - index }}
+                whileHover={index === 0 ? { scale: 1.02, rotateY: 2, rotateX: -1 } : undefined}
               >
                 <div className="bg-card border border-border/50 rounded-xl p-6 shadow-2xl">
-                  {/* Header */}
                   <div className="flex items-start gap-3 mb-4">
                     <div className="w-12 h-12 rounded-full bg-[#0A66C2]/20 flex items-center justify-center text-[#0A66C2] font-bold text-sm shrink-0">
                       {testimonial.avatar}
@@ -122,19 +150,14 @@ const LinkedInTestimonials = () => {
                       <p className="text-muted-foreground text-xs mt-0.5">{testimonial.timeAgo} • 🌐</p>
                     </div>
                   </div>
-
-                  {/* Content */}
                   <p className="text-secondary-foreground text-sm leading-relaxed mb-4">
                     {testimonial.content}
                   </p>
-
-                  {/* Engagement */}
                   <div className="flex items-center gap-1 mb-3">
                     <span className="text-xs">👍💡</span>
                     <span className="text-muted-foreground text-xs">{testimonial.likes}</span>
                     <span className="text-muted-foreground text-xs ml-auto">{testimonial.comments} comments</span>
                   </div>
-
                   <div className="border-t border-border/50 pt-3 flex items-center justify-around">
                     <button className="flex items-center gap-1.5 text-muted-foreground text-xs hover:text-foreground transition-colors">
                       <ThumbsUp className="w-4 h-4" /> Like
