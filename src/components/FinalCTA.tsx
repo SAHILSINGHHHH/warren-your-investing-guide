@@ -18,7 +18,7 @@ const FinalCTA = () => {
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, ease: "easeOut" }}
         >
-          <img src={warrenLogo} alt="Warren" className="w-[200px] h-auto mix-blend-screen" />
+          <img src={warrenLogo} alt="Warren" className="w-[200px] h-auto" />
         </motion.div>
 
         <motion.h2

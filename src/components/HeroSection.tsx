@@ -16,7 +16,7 @@ const HeroSection = () => {
         transition={{ duration: 1.2, ease: "easeOut" }}
         className="relative z-10"
       >
-        <img src={warrenLogo} alt="Warren" className="w-[280px] h-auto mix-blend-screen" />
+        <img src={warrenLogo} alt="Warren" className="w-[280px] h-auto" />
       </motion.div>
 
       <motion.h1
