@@ -1,5 +1,6 @@
 import HeroSection from "@/components/HeroSection";
 import HowItWorks from "@/components/HowItWorks";
+import LinkedInTestimonials from "@/components/LinkedInTestimonials";
 import AppPreview from "@/components/AppPreview";
 import InteractiveDemo from "@/components/InteractiveDemo";
 import FinalCTA from "@/components/FinalCTA";
@@ -10,6 +11,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <HeroSection />
       <HowItWorks />
+      <LinkedInTestimonials />
       <AppPreview />
       <InteractiveDemo />
       <FinalCTA />
