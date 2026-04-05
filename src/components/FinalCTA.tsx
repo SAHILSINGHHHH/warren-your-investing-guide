@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import warrenLogo from "@/assets/warren-logo-full.png";
+import appStoreBadge from "@/assets/app-store-badge.png";
 
 const FinalCTA = () => {
   const ref = useRef(null);
