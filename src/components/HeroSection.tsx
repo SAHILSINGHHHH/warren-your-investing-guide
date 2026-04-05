@@ -33,7 +33,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.8 }}
-        className="text-muted-foreground text-lg md:text-xl max-w-md text-center mt-4 font-body"
+        className="text-muted-foreground text-base md:text-lg max-w-md text-center mt-3 font-body"
       >
         Warren — your personal investing assistant that makes the market simple.
       </motion.p>
