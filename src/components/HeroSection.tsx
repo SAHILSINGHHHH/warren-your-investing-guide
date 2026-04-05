@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import warrenLogo from "@/assets/warren-logo-full.png";
+import appStoreBadge from "@/assets/app-store-badge.png";
 
 const HeroSection = () => {
   return (
