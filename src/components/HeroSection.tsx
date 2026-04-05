@@ -47,7 +47,7 @@ const HeroSection = () => {
         transition={{ duration: 0.6, delay: 1.1 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
-        className="mt-8"
+        className="mt-5"
       >
         <img src={appStoreBadge} alt="Download on the App Store" className="h-[52px] w-auto" />
       </motion.a>
