@@ -5,17 +5,30 @@ import AppPreview from "@/components/AppPreview";
 import InteractiveDemo from "@/components/InteractiveDemo";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <HeroSection />
-      <HowItWorks />
-      <LinkedInTestimonials />
-      <AppPreview />
-      <InteractiveDemo />
-      <FinalCTA />
-      <Footer />
+      <ScrollReveal>
+        <HowItWorks />
+      </ScrollReveal>
+      <ScrollReveal>
+        <LinkedInTestimonials />
+      </ScrollReveal>
+      <ScrollReveal>
+        <AppPreview />
+      </ScrollReveal>
+      <ScrollReveal>
+        <InteractiveDemo />
+      </ScrollReveal>
+      <ScrollReveal>
+        <FinalCTA />
+      </ScrollReveal>
+      <ScrollReveal>
+        <Footer />
+      </ScrollReveal>
     </div>
   );
 };
