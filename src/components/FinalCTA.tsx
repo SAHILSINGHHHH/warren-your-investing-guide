@@ -17,8 +17,10 @@ const FinalCTA = () => {
           initial={{ opacity: 0, scale: 0.7 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
           transition={{ duration: 1, ease: "easeOut" }}
+          className="logo-shine-container"
         >
           <img src={warrenLogo} alt="Warren" className="w-[200px] h-auto" />
+          <div className="logo-shine" />
         </motion.div>
 
         <motion.h2
