@@ -6,11 +6,13 @@ import InteractiveDemo from "@/components/InteractiveDemo";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
+import ScrollWipe from "@/components/ScrollWipe";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-background overflow-x-hidden">
       <HeroSection />
+      <ScrollWipe />
       <ScrollReveal>
         <HowItWorks />
       </ScrollReveal>

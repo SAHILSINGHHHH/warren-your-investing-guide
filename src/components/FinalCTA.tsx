@@ -14,6 +14,27 @@ const FinalCTA = () => {
       </div>
 
       <div className="max-w-3xl mx-auto flex flex-col items-center text-center relative z-10">
+        {/* Pulsing concentric rings */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+          {[0, 1, 2].map((i) => (
+            <motion.div
+              key={i}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/10"
+              animate={{
+                width: [100, 300 + i * 100],
+                height: [100, 300 + i * 100],
+                opacity: [0.4, 0],
+              }}
+              transition={{
+                duration: 3,
+                delay: i * 0.8,
+                repeat: Infinity,
+                ease: "easeOut",
+              }}
+            />
+          ))}
+        </div>
+
         <motion.div
           initial={{ opacity: 0, scale: 0.7 }}
           animate={inView ? { opacity: 1, scale: 1 } : {}}
@@ -49,8 +70,17 @@ const FinalCTA = () => {
           transition={{ duration: 0.6, delay: 0.7 }}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.97 }}
+          className="relative overflow-hidden rounded-lg"
         >
-          <img src={appStoreBadge} alt="Download on the App Store" className="h-[52px] w-auto" />
+          <img src={appStoreBadge} alt="Download on the App Store" className="h-[52px] w-auto relative z-10" />
+          <motion.div
+            className="absolute inset-0 z-20 pointer-events-none"
+            style={{
+              background: "linear-gradient(105deg, transparent 40%, hsl(var(--primary) / 0.15) 45%, hsl(var(--primary) / 0.3) 50%, hsl(var(--primary) / 0.15) 55%, transparent 60%)",
+            }}
+            animate={{ x: ["-100%", "200%"] }}
+            transition={{ duration: 3, repeat: Infinity, repeatDelay: 2, ease: "easeInOut" }}
+          />
         </motion.a>
       </div>
     </section>

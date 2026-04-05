@@ -60,16 +60,8 @@ const screens = [
         </div>
         <div className="px-4 py-3">
           <p className="text-white/40 text-[10px]">Total Value</p>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="text-white text-xl font-bold"
-          >
-            £12,450
-          </motion.p>
-          <p className="text-emerald-400 text-[10px] flex items-center gap-0.5">
-            <TrendingUp className="w-2.5 h-2.5" /> +8.3% all time
-          </p>
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-white text-xl font-bold">£12,450</motion.p>
+          <p className="text-emerald-400 text-[10px] flex items-center gap-0.5"><TrendingUp className="w-2.5 h-2.5" /> +8.3% all time</p>
         </div>
         <div className="px-4 space-y-2">
           <p className="text-white/50 text-[10px] mb-1">Warren's Portfolio</p>
@@ -78,13 +70,7 @@ const screens = [
             { name: "Stable Income", alloc: "35%", value: "£4,357", color: "bg-emerald-500" },
             { name: "Emerging Markets", alloc: "25%", value: "£3,113", color: "bg-amber-500" },
           ].map((item, i) => (
-            <motion.div
-              key={item.name}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: i * 0.15 }}
-              className="flex items-center justify-between bg-white/5 rounded-lg p-2"
-            >
+            <motion.div key={item.name} initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.15 }} className="flex items-center justify-between bg-white/5 rounded-lg p-2">
               <div className="flex items-center gap-2">
                 <div className={`w-2 h-2 rounded-full ${item.color}`} />
                 <div>
@@ -112,46 +98,16 @@ const screens = [
           <MessageSquare className="w-3 h-3 text-white/40" />
         </div>
         <div className="px-4 py-2 space-y-3 flex-1">
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="flex justify-end"
-          >
-            <div className="bg-primary text-primary-foreground text-[10px] px-3 py-2 rounded-xl rounded-br-sm max-w-[75%]">
-              Should I invest in index funds?
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="flex justify-start"
-          >
-            <div className="bg-white/10 text-white/80 text-[10px] px-3 py-2 rounded-xl rounded-bl-sm max-w-[80%]">
-              Index funds are great for long-term growth. An S&P 500 fund historically returns ~10% annually with minimal fees. I'd recommend starting with 60% of your portfolio here.
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="flex justify-end"
-          >
-            <div className="bg-primary text-primary-foreground text-[10px] px-3 py-2 rounded-xl rounded-br-sm max-w-[75%]">
-              What about my risk level?
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.3 }}
-            className="flex justify-start"
-          >
-            <div className="bg-white/10 text-white/80 text-[10px] px-3 py-2 rounded-xl rounded-bl-sm max-w-[80%]">
-              Based on your profile, you're a moderate investor. I've balanced your picks accordingly. 📊
-            </div>
-          </motion.div>
+          {[
+            { text: "Should I invest in index funds?", isUser: true, delay: 0.1 },
+            { text: "Index funds are great for long-term growth. An S&P 500 fund historically returns ~10% annually with minimal fees. I'd recommend starting with 60% of your portfolio here.", isUser: false, delay: 0.5 },
+            { text: "What about my risk level?", isUser: true, delay: 0.9 },
+            { text: "Based on your profile, you're a moderate investor. I've balanced your picks accordingly. 📊", isUser: false, delay: 1.3 },
+          ].map((msg, i) => (
+            <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: msg.delay }} className={`flex ${msg.isUser ? "justify-end" : "justify-start"}`}>
+              <div className={`text-[10px] px-3 py-2 rounded-xl max-w-[80%] ${msg.isUser ? "bg-primary text-primary-foreground rounded-br-sm" : "bg-white/10 text-white/80 rounded-bl-sm"}`}>{msg.text}</div>
+            </motion.div>
+          ))}
         </div>
       </div>
     ),
@@ -176,18 +132,9 @@ const screens = [
             { name: "V", full: "Visa Inc", match: "87%", change: "+0.9%", reason: "Consumer spending up" },
             { name: "JNJ", full: "Johnson & Johnson", match: "84%", change: "+0.4%", reason: "Defensive play" },
           ].map((stock, i) => (
-            <motion.div
-              key={stock.name}
-              initial={{ opacity: 0, y: 15 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.2 }}
-              className="bg-white/5 rounded-lg p-2.5"
-            >
+            <motion.div key={stock.name} initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.2 }} className="bg-white/5 rounded-lg p-2.5">
               <div className="flex items-center justify-between mb-1">
-                <div>
-                  <span className="text-white text-[10px] font-bold">{stock.name}</span>
-                  <span className="text-white/30 text-[8px] ml-1">{stock.full}</span>
-                </div>
+                <div><span className="text-white text-[10px] font-bold">{stock.name}</span><span className="text-white/30 text-[8px] ml-1">{stock.full}</span></div>
                 <span className="text-emerald-400 text-[9px]">{stock.change}</span>
               </div>
               <div className="flex items-center justify-between">
@@ -218,7 +165,7 @@ const AppPreview = () => {
   return (
     <section className="py-24 md:py-32 px-6 overflow-hidden">
       <div className="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-16">
-        {/* Phone mockup */}
+        {/* Phone mockup with floating animation */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, x: -60 }}
@@ -226,7 +173,25 @@ const AppPreview = () => {
           transition={{ duration: 0.8 }}
           className="relative flex-shrink-0"
         >
-          <div className="relative w-[280px] md:w-[300px] mx-auto">
+          {/* Pulsing glow ring */}
+          <motion.div
+            className="absolute inset-0 -m-4 rounded-[3.5rem] pointer-events-none"
+            animate={{
+              boxShadow: [
+                "0 0 30px 5px hsl(var(--primary) / 0.05)",
+                "0 0 60px 10px hsl(var(--primary) / 0.1)",
+                "0 0 30px 5px hsl(var(--primary) / 0.05)",
+              ],
+            }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          />
+
+          {/* Floating phone */}
+          <motion.div
+            animate={{ y: [-6, 6, -6] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            className="relative w-[280px] md:w-[300px] mx-auto"
+          >
             <div className="rounded-[3rem] border-[6px] border-muted bg-[#0a0a0a] p-2 glow-md overflow-hidden">
               <div className="rounded-[2.4rem] overflow-hidden h-[520px] md:h-[560px] bg-[#0a0a0a]">
                 <AnimatePresence mode="wait">
@@ -242,39 +207,25 @@ const AppPreview = () => {
                   </motion.div>
                 </AnimatePresence>
               </div>
-              {/* Bottom nav bar */}
               <div className="flex items-center justify-around py-2 border-t border-white/5">
                 {["Home", "Stocks", "Portfolio", "Account"].map((tab, i) => (
-                  <div
-                    key={tab}
-                    className={`flex flex-col items-center gap-0.5 ${
-                      i === (currentScreen === 0 ? 0 : currentScreen === 3 ? 1 : currentScreen === 1 ? 2 : 3)
-                        ? "text-primary"
-                        : "text-white/30"
-                    }`}
-                  >
+                  <div key={tab} className={`flex flex-col items-center gap-0.5 ${i === (currentScreen === 0 ? 0 : currentScreen === 3 ? 1 : currentScreen === 1 ? 2 : 3) ? "text-primary" : "text-white/30"}`}>
                     <BarChart3 className="w-3 h-3" />
                     <span className="text-[7px]">{tab}</span>
                   </div>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          {/* Screen indicators */}
           <div className="flex justify-center gap-1.5 mt-4">
             {screens.map((_, i) => (
-              <div
-                key={i}
-                className={`h-1 rounded-full transition-all duration-300 ${
-                  i === currentScreen ? "w-6 bg-primary" : "w-1.5 bg-white/20"
-                }`}
-              />
+              <div key={i} className={`h-1 rounded-full transition-all duration-300 ${i === currentScreen ? "w-6 bg-primary" : "w-1.5 bg-white/20"}`} />
             ))}
           </div>
         </motion.div>
 
-        {/* Text content */}
+        {/* Text content with staggered bullets */}
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -289,14 +240,18 @@ const AppPreview = () => {
               Warren explains every pick, every move, and every concept in plain language. Invest with full understanding.
             </p>
           </div>
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.6, delay: 0.5 }}
+          >
             <h3 className="font-heading text-xl font-semibold text-primary mb-2">
               Invest in Personalised Portfolios
             </h3>
             <p className="text-muted-foreground leading-relaxed max-w-md">
               Tell Warren your goals and risk appetite. Watch as it builds a portfolio that fits you perfectly.
             </p>
-          </div>
+          </motion.div>
         </motion.div>
       </div>
     </section>
