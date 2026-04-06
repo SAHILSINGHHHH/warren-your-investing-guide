@@ -10,7 +10,7 @@ const FinalCTA = () => {
   return (
     <section className="py-24 md:py-32 px-6 relative overflow-hidden" ref={ref}>
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-muted/10 blur-[100px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-muted/3 blur-[150px]" />
       </div>
 
       <div className="max-w-3xl mx-auto flex flex-col items-center text-center relative z-10">
