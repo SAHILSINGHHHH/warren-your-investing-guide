@@ -1,63 +1,59 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ThumbsUp, MessageCircle, Share2 } from "lucide-react";
+import { Star } from "lucide-react";
 
-const floatingEmojis = ["👍", "💡", "🔥", "📈", "⭐"];
-
-const testimonials = [
+const reviews = [
   {
-    name: "Priya Sharma",
-    title: "Portfolio Manager at Goldman Sachs",
-    avatar: "PS",
-    content: "Warren has completely transformed how I approach personal investments. The AI-curated stock picks are surprisingly accurate, and the personalized portfolios align perfectly with my risk tolerance. Highly recommend! 🚀",
-    likes: 247,
-    comments: 34,
-    timeAgo: "2d",
+    title: "An app I didn't know I needed",
+    author: "Charniceeee",
+    date: "04/12/2025",
+    rating: 5,
+    content: "Warren is super straight forward to use and has made investing less intimidating. I'm able to gain strong insight into my current portfolio and get tailored recommendations to suit my needs!",
   },
   {
-    name: "Alex Chen",
-    title: "Software Engineer at Google",
-    avatar: "AC",
-    content: "As someone who knew nothing about investing, Warren made it feel approachable and even exciting. I described my goals, and within minutes I had a portfolio tailored just for me. This is the future of fintech. 💡",
-    likes: 189,
-    comments: 21,
-    timeAgo: "5d",
+    title: "My favourite investment app",
+    author: "SunnyPadda",
+    date: "04/12/2025",
+    rating: 5,
+    content: "I was able to import my trading212 portfolio and managed to get great insights. Warren helped me diversify and make sure my portfolio was meeting my risk appetite. Great to see an app promoting sensible investment decisions.",
   },
   {
-    name: "Sarah Mitchell",
-    title: "Startup Founder & Angel Investor",
-    avatar: "SM",
-    content: "I've tried dozens of investment apps, but Warren stands out. The conversational AI understands nuance — it doesn't just throw generic advice. It actually listens to your financial personality. Game changer. 🔥",
-    likes: 312,
-    comments: 45,
-    timeAgo: "1w",
+    title: "Lifesaver! It knows what I need",
+    author: "SakshiHere",
+    date: "02/12/2025",
+    rating: 5,
+    content: "Normally im a skeptic with ai apps but this is really helpful. For me investing was a myth but with Warren its much easier. Im really looking to when they can look my ibkr investments!",
   },
   {
-    name: "Raj Patel",
-    title: "Financial Analyst at JP Morgan",
-    avatar: "RP",
-    content: "The stock screening algorithm is incredibly smart. Warren narrows down picks that match my investment style better than most professional tools I've used. And it's accessible to everyone — not just Wall Street.",
-    likes: 156,
-    comments: 18,
-    timeAgo: "3d",
+    title: "Download it",
+    author: "Neimi1151",
+    date: "10 Feb",
+    rating: 5,
+    content: "Excellent UI. Investing made easy.",
   },
   {
-    name: "Emma Williams",
-    title: "Marketing Director | Retail Investor",
-    avatar: "EW",
-    content: "Finally an investing app that doesn't make me feel overwhelmed. Warren's UI is beautiful, and the AI assistant feels like talking to a knowledgeable friend. My portfolio is up 12% since I started using it! 📈",
-    likes: 278,
-    comments: 38,
-    timeAgo: "4d",
+    title: "Money manager",
+    author: "Stonkssssssssss",
+    date: "17 Mar",
+    rating: 5,
+    content: "Helped me offset alot of risk in my portfolio",
   },
 ];
+
+const StarRating = () => (
+  <div className="flex gap-0.5">
+    {[...Array(5)].map((_, i) => (
+      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+    ))}
+  </div>
+);
 
 const LinkedInTestimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+      setCurrentIndex((prev) => (prev + 1) % reviews.length);
     }, 4000);
     return () => clearInterval(interval);
   }, []);
@@ -65,38 +61,13 @@ const LinkedInTestimonials = () => {
   const getVisibleCards = () => {
     const cards = [];
     for (let i = 0; i < 3; i++) {
-      cards.push(testimonials[(currentIndex + i) % testimonials.length]);
+      cards.push(reviews[(currentIndex + i) % reviews.length]);
     }
     return cards;
   };
 
   return (
     <section className="py-24 px-6 relative overflow-hidden">
-      {/* Floating reaction emojis */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {floatingEmojis.map((emoji, i) => (
-          <motion.span
-            key={i}
-            className="absolute text-lg opacity-0"
-            style={{ left: `${15 + i * 18}%`, bottom: "10%" }}
-            animate={{
-              y: [0, -300, -500],
-              opacity: [0, 0.6, 0],
-              x: [0, (i % 2 === 0 ? 1 : -1) * 30],
-            }}
-            transition={{
-              duration: 5 + i,
-              delay: i * 1.5,
-              repeat: Infinity,
-              repeatDelay: 3,
-              ease: "easeOut",
-            }}
-          >
-            {emoji}
-          </motion.span>
-        ))}
-      </div>
-
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -106,24 +77,24 @@ const LinkedInTestimonials = () => {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center gap-3 mb-4">
-            <svg viewBox="0 0 24 24" className="w-8 h-8 fill-[#0A66C2]">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+            <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none">
+              <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" fill="currentColor" className="text-muted-foreground"/>
             </svg>
-            <span className="text-[#0A66C2] font-semibold text-lg">LinkedIn</span>
+            <span className="text-muted-foreground font-semibold text-lg">App Store Reviews</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-4">
-            What People Are Saying
+            What Our Users Say
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Real feedback from investors and professionals on LinkedIn
+            Real reviews from Warren users on the App Store
           </p>
         </motion.div>
 
-        <div className="relative h-[340px] flex items-center justify-center" style={{ perspective: "1000px" }}>
+        <div className="relative h-[300px] flex items-center justify-center" style={{ perspective: "1000px" }}>
           <AnimatePresence mode="popLayout">
-            {getVisibleCards().map((testimonial, index) => (
+            {getVisibleCards().map((review, index) => (
               <motion.div
-                key={`${testimonial.name}-${currentIndex}-${index}`}
+                key={`${review.author}-${currentIndex}-${index}`}
                 initial={{ scale: 0.8, opacity: 0, x: 100, rotateY: 5 }}
                 animate={{
                   scale: 1 - index * 0.05,
@@ -140,35 +111,19 @@ const LinkedInTestimonials = () => {
                 whileHover={index === 0 ? { scale: 1.02, rotateY: 2, rotateX: -1 } : undefined}
               >
                 <div className="bg-card border border-border/50 rounded-xl p-6 shadow-2xl">
-                  <div className="flex items-start gap-3 mb-4">
-                    <div className="w-12 h-12 rounded-full bg-[#0A66C2]/20 flex items-center justify-center text-[#0A66C2] font-bold text-sm shrink-0">
-                      {testimonial.avatar}
+                  <div className="flex items-start justify-between mb-2">
+                    <div>
+                      <h4 className="text-foreground font-semibold text-sm">{review.title}</h4>
+                      <StarRating />
                     </div>
-                    <div className="flex-1">
-                      <h4 className="text-foreground font-semibold text-sm">{testimonial.name}</h4>
-                      <p className="text-muted-foreground text-xs">{testimonial.title}</p>
-                      <p className="text-muted-foreground text-xs mt-0.5">{testimonial.timeAgo} • 🌐</p>
+                    <div className="text-right">
+                      <p className="text-muted-foreground text-xs">{review.date}</p>
+                      <p className="text-muted-foreground text-xs">{review.author}</p>
                     </div>
                   </div>
-                  <p className="text-secondary-foreground text-sm leading-relaxed mb-4">
-                    {testimonial.content}
+                  <p className="text-secondary-foreground text-sm leading-relaxed mt-4">
+                    {review.content}
                   </p>
-                  <div className="flex items-center gap-1 mb-3">
-                    <span className="text-xs">👍💡</span>
-                    <span className="text-muted-foreground text-xs">{testimonial.likes}</span>
-                    <span className="text-muted-foreground text-xs ml-auto">{testimonial.comments} comments</span>
-                  </div>
-                  <div className="border-t border-border/50 pt-3 flex items-center justify-around">
-                    <button className="flex items-center gap-1.5 text-muted-foreground text-xs hover:text-foreground transition-colors">
-                      <ThumbsUp className="w-4 h-4" /> Like
-                    </button>
-                    <button className="flex items-center gap-1.5 text-muted-foreground text-xs hover:text-foreground transition-colors">
-                      <MessageCircle className="w-4 h-4" /> Comment
-                    </button>
-                    <button className="flex items-center gap-1.5 text-muted-foreground text-xs hover:text-foreground transition-colors">
-                      <Share2 className="w-4 h-4" /> Share
-                    </button>
-                  </div>
                 </div>
               </motion.div>
             ))}
